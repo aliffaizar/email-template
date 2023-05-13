@@ -19,5 +19,6 @@ export const sendMail = async (to: string, subject: string, html: string) => {
     subject,
     html,
   })
+  console.log(info)
   return info
 }
