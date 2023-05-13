@@ -1,43 +1,31 @@
-'use client'
-import { useState } from 'react'
 import { EMAIL_TEMPLATES } from '@/email-template'
+import { sendMail } from '@/utils/send-mail'
 
 export default function SendEmail() {
-  const [template, setTemplate] = useState('')
-  const [email, setEmail] = useState('')
+  async function send(data: FormData) {
+    'use server'
+    const email = data.get('email')
+    const template = data.get('template')
 
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!template || !email) return
-    const res = await fetch(
-      `https://email-template-aliffaizar.vercel.app/api/send`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ template, email }),
-      }
+    const emailTemplate = EMAIL_TEMPLATES.find((t) => t.template === template)
+    await sendMail(
+      email as string,
+      template as string,
+      emailTemplate?.node || 'template not found'
     )
-    if (res.ok) {
-      alert('Email sent!')
-    } else {
-      alert('Failed to send email')
-    }
-    setTemplate('')
-    setEmail('')
+    data.set('email', '')
+    data.set('template', '')
+    alert('Email sent')
   }
-
   return (
     <div className='w-full h-full flex justify-center items-center'>
-      <form onSubmit={submit} className='flex flex-col gap-4'>
+      <form action={send} className='flex flex-col gap-4'>
         <select
-          value={template}
-          onChange={(e) => setTemplate(e.target.value)}
+          id='template'
+          name='template'
           required
           className='select select-primary w-full max-w-xs'
         >
-          <option value={''} disabled>
-            Select a template
-          </option>
           {EMAIL_TEMPLATES.map((template) => (
             <option value={template.template} key={template.name}>
               {template.name}
@@ -46,8 +34,8 @@ export default function SendEmail() {
         </select>
         <input
           type='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          id='email'
+          name='email'
           required
           placeholder='Type here'
           className='input input-bordered input-primary w-full max-w-xs'

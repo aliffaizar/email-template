@@ -8,6 +8,7 @@ const findTemplate = (template: string) => {
 
 export async function POST(req: NextRequest) {
   const { template, email } = await req.json()
+
   const emailTemplate = findTemplate(template)
 
   if (!emailTemplate) {
@@ -15,11 +16,12 @@ export async function POST(req: NextRequest) {
   }
 
   const subject = 'Testing email template'
-  const { messageId } = await sendMail(email, subject, emailTemplate.node)
+  const info = await sendMail(email, subject, emailTemplate.node).catch(
+    (err) => {
+      console.log(err)
+      return NextResponse.json({ error: err }, { status: 500 })
+    }
+  )
 
-  if (!messageId) {
-    return NextResponse.json({ error: 'Error sending email' }, { status: 500 })
-  }
-
-  return NextResponse.json({ message: 'Email sent', messageId })
+  return NextResponse.json({ message: 'Email sent', info })
 }

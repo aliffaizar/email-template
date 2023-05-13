@@ -13,11 +13,16 @@ const smtpConfig = {
 const transporter = nodemailer.createTransport(smtpConfig)
 
 export const sendMail = async (to: string, subject: string, html: string) => {
-  const info = await transporter.sendMail({
-    from: `Alif Faizar <${smtpConfig.auth.user}>`,
-    to,
-    subject,
-    html,
-  })
-  return info
+  try {
+    const info = await transporter.sendMail({
+      from: `Alif Faizar <${smtpConfig.auth.user}>`,
+      to,
+      subject,
+      html,
+    })
+    return info
+  } catch (err) {
+    console.log(err)
+    return
+  }
 }
