@@ -1,3 +1,4 @@
+import { SubmitButtons } from '@/components/buttons/SubmitButtons'
 import { EMAIL_TEMPLATES } from '@/email-template'
 import { sendMail } from '@/utils/send-mail'
 
@@ -15,7 +16,6 @@ export default function SendEmail() {
     )
     data.set('email', '')
     data.set('template', '')
-    alert('Email sent')
   }
   return (
     <div className='w-full h-full flex justify-center items-center'>
@@ -40,9 +40,10 @@ export default function SendEmail() {
           placeholder='Type here'
           className='input input-bordered input-primary w-full max-w-xs'
         />
-        <button type='submit' className='btn btn-primary w-full max-w-xs'>
+        {/* <button type='submit' className='btn btn-primary w-full max-w-xs'>
           Send
-        </button>
+        </button> */}
+        <SubmitButtons action={send} />
       </form>
     </div>
   )

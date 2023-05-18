@@ -1,4 +1,5 @@
-import { Body, Head, Html, Preview, Tailwind } from '@react-email/components'
+import { Body, Head, Html, Preview } from '@react-email/components'
+import { Tailwind } from '@react-email/tailwind'
 
 type Prop = {
   children: React.ReactNode
@@ -16,7 +17,7 @@ export default function Base({
         <Head>
           <title>{title}</title>
         </Head>
-        <Body>{children}</Body>
+        <Body className='w-full'>{children}</Body>
       </Html>
     </Tailwind>
   )

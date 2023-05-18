@@ -9,13 +9,13 @@ export default function Navbar() {
           </a>
           <nav className='hidden sm:flex items-center'>
             <a
-              href=''
+              href='/'
               className='text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium'
             >
               Home
             </a>
             <a
-              href=''
+              href='/'
               className='text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium'
             >
               About

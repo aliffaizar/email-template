@@ -1,21 +1,15 @@
-import {
-  Column,
-  Container,
-  Heading,
-  Hr,
-  Img,
-  Text,
-} from '@react-email/components'
+import { Container, Heading, Hr, Img, Text } from '@react-email/components'
+import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa'
 
 import Base from './components/base'
-import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { BASE_URL } from '.'
 
 export default function WelcomeEmail() {
   return (
     <Base title='Welcome to the app!'>
       <Container className='bg-white'>
         <Img
-          src='/images/logoipsum.svg'
+          src={`${BASE_URL}/images/logoipsum.svg`}
           alt='logo'
           className='m-4 mt-8 h-7 sm:h-8'
         />
@@ -41,7 +35,7 @@ export default function WelcomeEmail() {
           <div className='w-5/12'>
             <div className='aspect-h-1 aspect-w-1 sm:aspect-h-3 sm:aspect-w-4'>
               <Img
-                src='/images/placeholder.jpg'
+                src={`${BASE_URL}/images/placeholder.jpg`}
                 alt='1'
                 className='object-cover object-center w-full h-full'
               />
@@ -61,7 +55,7 @@ export default function WelcomeEmail() {
           <div className='w-5/12'>
             <div className='aspect-h-1 aspect-w-1 sm:aspect-h-3 sm:aspect-w-4'>
               <Img
-                src='/images/placeholder.jpg'
+                src={`${BASE_URL}/images/placeholder.jpg`}
                 alt='1'
                 className='object-cover object-center w-full h-full'
               />
